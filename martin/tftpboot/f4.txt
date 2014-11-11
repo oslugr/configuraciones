@@ -1,0 +1,17 @@
+F1 = CentOS
+F2 = Debian
+F3 = BootDisk
+F4 = Varios
+F5 = Suse
+F6 = Mandriva
+
+Tus opciones son :
+
+slackware  ------- Instalacion normal
+res-winxp  ------- Restaura WinXP
+res-debian ------- Restaura Debian
+res-slack  ------- Restaura Slackware
+res-udesk  ------- Restaura Ubuntu Desktop
+res-userver------- Restaura Ubuntu Server
+lubuntu	---------- Lubuntu
+kali ------------- Kali

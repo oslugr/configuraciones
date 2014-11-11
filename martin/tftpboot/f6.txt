@@ -1,0 +1,11 @@
+F1 = CentOS
+F2 = Debian
+F3 = BootDisk
+F4 = Varios
+F5 = Suse
+F6 = Mandriva
+
+Tus opciones son de Fedora son :
+
+mandriva ------- Instalacion normal
+

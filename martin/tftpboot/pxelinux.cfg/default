@@ -1,0 +1,166 @@
+#display debian-installer/i386/boot-screens/syslinux.txt
+prompt 1
+timeout 1200
+default local
+IPAPPEND 2
+
+F1 f1.txt
+F2 f2.txt
+F3 f3.txt
+F4 f4.txt
+F5 f5.txt
+F6 f6.txt
+
+############# PARA ARRANCAR EN FORMA LOCAL  ############################3
+label local
+	localboot 0
+
+######################### DEBIAN ############################
+label debian
+        kernel /debian-squeeze/linux
+        append vga=788 initrd=/debian-squeeze/initrd.gz --quiet
+label debian2
+        kernel /debian-lenny/linux
+        append vga=788 initrd=/debian-lenny/initrd.gz -- quiet
+
+LABEL etch
+        kernel debian-etch/i386/linux
+        append priority=low vga=normal initrd=debian-etch/i386/initrd.gz --
+
+LABEL debianrescue
+        kernel debian-etch/i386/linux
+        append vga=normal initrd=debian-etch/i386/initrd.gz rescue/enable=true --
+
+		
+######################### CENTOS ############################3
+#label centos
+#	kernel centos5/vmlinuz
+#        append loglevel=debug vga=normal initrd=centos5/initrd.img ramdisk_size=11686 root=/dev/rd/0 rw ks=http://linux.itu.uncu.edu.ar/ks/limpio.cfg
+
+label centos  
+        kernel centos6/vmlinuz 
+        append loglevel=debug vga=normal initrd=centos6/initrd.img ramdisk_size=11686 root=/dev/rd/0 rw
+
+label centos-ks
+	kernel centos6/vmlinuz
+        append loglevel=debug vga=normal initrd=centos6/initrd.img ramdisk_size=11686 root=/dev/rd/0 rw ks=http://linux.itu.uncu.edu.ar/ks/limpio1.cfg
+
+#label centos-ks
+#	kernel centos5/vmlinuz
+#	IPAPPEND 2 APPEND ksdevice=bootif
+#	APPEND vga=normal IPAPPEND 2 ksdevice=bootif initrd=centos5/initrd.img ramdisk_size=11686 root=/dev/rd/0 rw ks=http://linux.itu.uncu.edu.ar/ks/centos.cfg
+
+label centos-ksfull
+	kernel centos5/vmlinuz
+        append vga=normal initrd=centos5/initrd.img ramdisk_size=11686 root=/dev/rd/0 rw ks=http://linux.itu.uncu.edu.ar/ks/centos-full2.cfg
+
+
+######################### UBUNTU ###############################
+
+LABEL ubuntu
+	kernel ubuntu-installer/amd64/linux
+	append vga=788 initrd=ubuntu-installer/amd64/initrd.gz -- quiet 
+
+######################## KALI ##############################
+
+LABEL kali
+	kernel kali/linux
+	append vga=788 initrd=kali/initrd.gz --quiet netbootÂ=http
+######################### LUBUNTU ###############################
+
+LABEL lubuntu
+        kernel lubuntu/vmlinuz
+        append vga=normal initrd=lubuntu/initrd.lz netboot=http install=http://linux.itu.uncu.edu.ar/lubuntu
+
+######################### bootdisk ############################3
+LABEL rescue
+	kernel centos/vmlinuz
+        append vga=normal initrd=centos/initrd.img ramdisk_size=11686 root=/dev/rd/0 rw ks=http://linux.itu.uncu.edu.ar/ks/limpio.cfg rescue
+
+label pxes
+   	kernel pxes/vmlinuz-2.6.15.4-1pxes.2.i586
+	append initrd=pxes/pxes-1.1.squash ro sd=local video=vesa vga=0x303 root=/dev/ram ramdisk_size=21104 SESSION_DEFAULT=rdp RDP_SERVER_NAME=192.168.218.125 RDP_USER=labtelco01 X_VIDEO_MODES="1024x768" RDP_COLOR_DEPTH=16 MOUSE_WHEEL_ENABLED=1 RDP_ASK_ENABLED=0 
+
+label memtest
+        kernel disk/memtest86
+
+label QNX net
+        kernel disk/memdisk
+        append initrd=disk/qnxnet.img
+
+label tomboot
+        kernel disk/memdisk
+        append initrd=disk/tomsrtbt.img
+
+
+####################################### Slackware ##############################
+label slackware
+	kernel slackware/hugesmp.s
+	append initrd=slackware/initrd.img
+
+label slackware64
+	kernel slackware64/huge.s
+	append initrd=slackware64/initrd.img
+
+label part
+	kernel slackware/hugesmp.s_part
+	append initrd=slackware/initrd_part-2010-08-10.img
+
+label format
+	kernel slackware/hugesmp.s_part
+        append initrd=slackware/initrd-2013-03-04.img 
+
+###################### RESTAURA con UDP-CAST ###################################
+label res-winxp
+	kernel udpcast/linux
+	append load_ramdisk=1 initrd=udpcast/initrd_auto root=01:00 auto=yes lang=US kbdmap=US
+	ipappend 1
+
+label res-debian
+	kernel udpcast/linux-2.6.27.6
+	append load_ramdisk=1 initrd=udpcast/initrd_debian3 root=01:00 auto=yes lang=US kbdmap=US
+	ipappend 1
+
+label res-slack
+	kernel udpcast/linux-2.6.27.6
+	append load_ramdisk=1 initrd=udpcast/initrd_slackware2 root=01:00 auto=yes lang=US kbdmap=US
+	ipappend 1
+
+label res-udesk
+	kernel udpcast/linux-2.6.27.6
+	append load_ramdisk=1 initrd=udpcast/initrd_ubuntu_desktop root=01:00 auto=yes lang=US kbdmap=US
+	ipappend 1
+
+label res-userver
+	kernel udpcast/linux-2.6.27.6
+	append load_ramdisk=1 initrd=udpcast/initrd_ubuntu_server root=01:00 auto=yes lang=US kbdmap=US
+	ipappend 1
+
+###################### OPEN SUSE  ###################################
+
+label suse12
+         kernel suse12/linux
+         append initrd=suse12/initrd splash=silent showopts install=http://linux.itu.uncu.edu.ar/suse12
+
+label suselive
+         kernel suselive/linux
+         append initrd=suselive/initrd splash=silent showopts install=http://linux.itu.uncu.edu.ar/suselive
+
+##################### MANDRIVA #####################################
+
+label mandriva
+         kernel mandriva/vmlinuz0
+         append initrd=mandriva/initrd0.img root=live:CDLABEL=Mandriva.2011.i586.1 rootfstype=auto ro liveimg vga=788 desktop desktop nopat rd_NO_LUKS rd_NO_MD noiswmd splash=silent quiet logo.nologo
+
+
+##############################################################
+
+label clonezilla
+	kernel clone/vmlinuz
+	append initrd=clone/initrd.img boot=live  install=http://linux.itu.uncu.edu.ar/clone
+
+##############################################################
+LABEL esxi
+  KERNEL esx5.1/mboot.c32
+  APPEND -c esx5.1/boot.cfg
+

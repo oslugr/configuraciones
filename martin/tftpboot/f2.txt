@@ -1,0 +1,13 @@
+F1 = CentOS
+F2 = Debian
+F3 = BootDisk
+F4 = Varios
+F5 = Suse
+F6 = Mandriva
+
+Tus opciones en Debian son:
+
+debian  --------- Instalacion normal de Debian 4.0
+debian rescue --- Debian rescue
+
+
