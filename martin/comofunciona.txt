@@ -30,3 +30,7 @@ Noten que tenemos muchas y variadas formas de instalación y de restauración.
 En caso que los alumnos arruinen un Windows (cosa muy frecuente), los restauramos muy fácilmente de esta manera.
 Incluso si arruinan la tabla de particones del disco rígido, las restauramos con este método, el cliente sólo tiene que ocuparse de instruir a la BIOS
 de que arranque desde la red y seguir las instrucciones que aparecen en pantalla.
+
+Hay tutoriales en inglés:
+debian: https://wiki.debian.org/PXEBootInstall
+centos: http://wiki.centos.org/es/HowTos/PXE/PXE_Setup
