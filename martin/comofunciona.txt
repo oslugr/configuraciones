@@ -1,0 +1,7 @@
+Tenemos dos equipos: uno al que llamaremos "servidor" y al otro "cliente". Instalaremos Linux en el cliente dando instrucción a la BIOS de que arranque desde la red.
+Esto normalmente se lleva a cabo mediante PXE, que imita el protocolo de arranque desde disquete o disco rígido.
+Cliente y servidor deben estar en la misma red LAN. En nuestro caso, en la OSL, bastaría con colocarle una segunda placa de red Ethernet al servidor y utilizar
+un cable cruzado con el cliente. Si fuera necesario instalar varios equipos cliente a la vez, habría que conectarlos todos a un switch.
+Tenemos que utilizar una segunda placa de red en el servidor para que las peticiones de DHCP y el tráfico de la instalación NO salgan a la red del CEVUG.
+La configuración que se muestra en Github es la del servidor.
+La configuración del servidor DHCP es la que está en el archivo (fichero) /etc/dhcp/dhcpd.conf
