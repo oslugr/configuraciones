@@ -1,7 +1,32 @@
 Tenemos dos equipos: uno al que llamaremos "servidor" y al otro "cliente". Instalaremos Linux en el cliente dando instrucción a la BIOS de que arranque desde la red.
-Esto normalmente se lleva a cabo mediante PXE, que imita el protocolo de arranque desde disquete o disco rígido.
+Esto normalmente se lleva a cabo mediante PXE, que imita el protocolo de arranque desde disquete o disco rígido, pero arrancando desde la red.
 Cliente y servidor deben estar en la misma red LAN. En nuestro caso, en la OSL, bastaría con colocarle una segunda placa de red Ethernet al servidor y utilizar
 un cable cruzado con el cliente. Si fuera necesario instalar varios equipos cliente a la vez, habría que conectarlos todos a un switch.
 Tenemos que utilizar una segunda placa de red en el servidor para que las peticiones de DHCP y el tráfico de la instalación NO salgan a la red del CEVUG.
 La configuración que se muestra en Github es la del servidor.
-La configuración del servidor DHCP es la que está en el archivo (fichero) /etc/dhcp/dhcpd.conf
+La configuración del servidor DHCP es la que está en el archivo (fichero) /etc/dhcpd.conf pero en Debian suele estar en /etc/dhcpd/dhcpd.conf
+En el ejemplo mostrado, la línea 11 definiría a la subred (segunda placa Ethernet).
+Nótese en la línea 22 la directiva filename "/pxelinux.0" para PXE y TFTP.
+A partir de la línea 24 está comentadas las directivas para cada una de las máquinas de los equipos del laboratorio de redes.
+En nuestro caso, dejamos fijo el nombre y la dirección IP de cada equipo de acuerdo a su dirección MAC.
+La PC se llama de la misma manera y tiene siempre el mismo número IP sin importar si se arrancó Debian, Ubuntu, CentOS o Windows.
+En cuanto al servidor TFTP, normalmente presta servicio de transferencia de archivos a partir del directorio "/tftpboot", pero es configurable.
+En el ITU, sólo hemos colocado las primeras imágenes de arranque en los subdirectorios "debian/", "ubuntu/", "centos/", pero los paquetes a instalar
+están en el repositorio http://linux.itu.uncu.edu.ar/
+Esto lo hacemos así para que el repositorio esté accesible desde fuera de la red del laboratorio de redes.
+En el directorio "/tftpboot" está el archivo "pxelinux.0" mencionado en la configuración de /etc/dhcpd.conf
+En el archivo "tftpboot/pxelinux.cfg/default" puede verse a la configuración del PXE+TFTP :
+Por ejemplo, en la línea 7 dice que si el cliente presiona la tecla F1 obtiene como ayuda el texto indicado en el archivo "f1.txt", que está en "/tftpboot"
+Esa ayuda que le aparecerá al cliente dice que si escribe "centos" en respuesta al prompt "boot: " iniciará una instalación normal de Centos; si escribe "centos-ks"
+iniciará una instalación desatendida de Centos (con kikstart).
+Si el cliente presiona la tecla F2 aparece la ayuda para instalar Debian, y así.
+Supongamos que el cliente escribe "debian" frente al prompt "boot: ", según la línea 19 del archivo "tftpboot/pxelinux.cfg/default"
+el TFTP entregará al cliente el núcleo indicado en "kernel /debian-squeeze/linux" según la línea 20 y a continuación
+entregará los parámetros al núcleo con la instrucción "append" de la línea 21.
+Con esto, el cliente empieza a ver el arranque del núcleo previo a la instalación misma.
+Para instalar Centos con kikstart, la línea 46 indica "append ...ks=http://linux.itu.uncu.edu.ar/ks/limpio1.cfg"
+es decir, el archivo de configuración kikstart para una instalación desatendida está accesible en el servidor Web.
+Noten que tenemos muchas y variadas formas de instalación y de restauración.
+En caso que los alumnos arruinen un Windows (cosa muy frecuente), los restauramos muy fácilmente de esta manera.
+Incluso si arruinan la tabla de particones del disco rígido, las restauramos con este método, el cliente sólo tiene que ocuparse de instruir a la BIOS
+de que arranque desde la red y seguir las instrucciones que aparecen en pantalla.
